@@ -12,4 +12,4 @@ Writes string to a file
 ###### lowercase - Convert the content to lower case
 ###### uppercase - Concert the content to upper case
 ###### stupid remover - This replaces the word stupid (only in lower case) to s*****
-###### stupid remover - This removes consecutive duplicated words.
+###### duplicate remover - This removes consecutive duplicated words.
