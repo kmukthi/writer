@@ -26,4 +26,22 @@ The behavior of the writer is shown in the respective test files.
 - StringWriterTest
 - WriterFactoryTest
 
+## Java version
+JDK 17.0.2
+
+## Maven version
+Version 3.6.3
+
+## About IDE & Dev Environment
+IntelliJ IDEA 2020.3.4 (Community Edition)
+Build #IC-203.8084.24, built on April 27, 2021
+Runtime version: 11.0.10+8-b1145.96 x86_64
+VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
+macOS 10.16
+GC: ParNew, ConcurrentMarkSweep
+Memory: 1979M
+Cores: 12
+Registry: debugger.watches.in.variables=false
+
+
 
