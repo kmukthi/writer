@@ -14,6 +14,8 @@ public abstract class Writer {
     }
 
     public final void write(String content) {
+        if (content == null)
+            throw new RuntimeException("cannot write null");
         if (!isClosed)
             writeContent(content);
     }
@@ -21,29 +23,42 @@ public abstract class Writer {
         isClosed = true;
     }
 
-    public final void lowerCase() {
+    public final void toLowerCase() {
         writeContent(read().toLowerCase());
     }
 
-    public final void upperCase() {
+    public final void toUpperCase() {
         writeContent(read().toUpperCase());
     }
 
-    public final void stupidRemover() {
+    public final void removeStupid() {
         writeContent(read().replace(STUPID, STUPID_REPLACEMENT));
     }
 
-    public final void duplicateRemover() {
+    public final void removeDuplicate() {
         String[] split = this.read().split(" ");
         String result = "";
         for (int i = 0; i < split.length; i++) {
-            result+=split[i]+" ";
-            final String duplicateWord = split[i];
-            while (i < split.length - 1 && duplicateWord.equals(split[i+1])) {
+            final String currentWord = split[i];
+            result+=currentWord + " ";
+            while (i < split.length - 1 && currentWord.equals(alphaNumericValues(split[i+1]))) {
+                String punctuations = getPunctuations(split[i+1]);
+                if (punctuations.length() > 0) {
+                    result = result.substring(0, result.length() - 1);
+                    result += punctuations + " ";
+                }
                 i++;
             }
         }
         writeContent(result.trim());
+    }
+
+    private String alphaNumericValues(String word) {
+        return word.replaceAll("[^A-Za-z0-9]", "");
+    }
+
+    private String getPunctuations(String word) {
+        return word.replaceAll("[^!,.]", "");
     }
 
 

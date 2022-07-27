@@ -34,7 +34,7 @@ public class FileWriterTest {
         this.fileWriter.write("Hello, My Name is MUKTHI NATH");
         Assert.assertEquals("Hello, My Name is MUKTHI NATH", fileWriter.read());
 
-        this.fileWriter.lowerCase();
+        this.fileWriter.toLowerCase();
         Assert.assertEquals("hello, my name is mukthi nath", fileWriter.read());
 
     }
@@ -44,42 +44,42 @@ public class FileWriterTest {
         this.fileWriter.write("Hello, My Name is MUKTHI NATH");
         Assert.assertEquals("Hello, My Name is MUKTHI NATH", fileWriter.read());
 
-        this.fileWriter.upperCase();
+        this.fileWriter.toUpperCase();
         Assert.assertEquals("HELLO, MY NAME IS MUKTHI NATH", fileWriter.read());
     }
 
     @Test
     public void shouldRemoveStupid() {
         this.fileWriter.write("This is really really stupid!!!");
-        this.fileWriter.stupidRemover();
+        this.fileWriter.removeStupid();
         Assert.assertEquals("This is really really s*****!!!", fileWriter.read());
     }
 
     @Test
     public void shouldReturnSameStringIfStupidIsNotPresent() {
         this.fileWriter.write("This is really really");
-        this.fileWriter.stupidRemover();
+        this.fileWriter.removeStupid();
         Assert.assertEquals("This is really really", fileWriter.read());
     }
 
     @Test
     public void shouldRemoveConsecutiveDuplicate() {
         this.fileWriter.write("This is really really stupid!!!");
-        this.fileWriter.duplicateRemover();
+        this.fileWriter.removeDuplicate();
         Assert.assertEquals("This is really stupid!!!", fileWriter.read());
     }
 
     @Test
     public void shouldRemoveConsecutiveDuplicate1() {
         this.fileWriter.write("This is really stupid!!!");
-        this.fileWriter.duplicateRemover();
+        this.fileWriter.removeDuplicate();
         Assert.assertEquals("This is really stupid!!!", fileWriter.read());
     }
 
     @Test
     public void shouldRemoveConsecutiveDuplicate2() {
         this.fileWriter.write("This is really really really really stupid!!! really really");
-        this.fileWriter.duplicateRemover();
+        this.fileWriter.removeDuplicate();
         Assert.assertEquals("This is really stupid!!! really", fileWriter.read());
     }
 
@@ -87,8 +87,8 @@ public class FileWriterTest {
     public void shouldRemoveDuplicateAndStupidCombined() {
         this.fileWriter.write("This is really really stupid!!!");
         this.fileWriter.close();
-        this.fileWriter.duplicateRemover();
-        this.fileWriter.stupidRemover();
+        this.fileWriter.removeDuplicate();
+        this.fileWriter.removeStupid();
         Assert.assertEquals("This is really s*****!!!", fileWriter.read());
     }
 
@@ -97,5 +97,24 @@ public class FileWriterTest {
         this.fileWriter.writeContent("This is really really stupid!!!");
         this.fileWriter.close();
         Assert.assertEquals("This is really really stupid!!!", fileWriter.read());
+    }
+
+    @Test
+    public void shouldWriteTwoStupidWithExclamation() {
+        this.fileWriter.writeContent("This is really really stupid stupid!!!");
+        this.fileWriter.removeDuplicate();
+        Assert.assertEquals("This is really stupid!!!", fileWriter.read());
+    }
+
+    @Test
+    public void shouldWriteThreeStupidWithExclamation() {
+        this.fileWriter.writeContent("This is really really stupid stupid!!! stupid stupid");
+        this.fileWriter.removeDuplicate();
+        Assert.assertEquals("This is really stupid!!!", fileWriter.read());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void shouldThrowExcpetionWhileWrtingNull() {
+        this.fileWriter.write(null);
     }
 }
