@@ -32,25 +32,32 @@ public abstract class Writer {
     }
 
     public final void removeStupid() {
-        writeContent(read().replace(STUPID, STUPID_REPLACEMENT));
+        String content = this.read();
+        if (content != null && content.length() > 0) {
+            writeContent(read().replace(STUPID, STUPID_REPLACEMENT));
+        }
     }
 
     public final void removeDuplicate() {
-        String[] split = this.read().split(" ");
-        String result = "";
-        for (int i = 0; i < split.length; i++) {
-            final String currentWord = split[i];
-            result+=currentWord + " ";
-            while (i < split.length - 1 && currentWord.equals(alphaNumericValues(split[i+1]))) {
-                String punctuations = getPunctuations(split[i+1]);
-                if (punctuations.length() > 0) {
-                    result = result.substring(0, result.length() - 1);
-                    result += punctuations + " ";
+        String content = this.read();
+        if (content != null && content.length() > 0) {
+            String[] split = this.read().split(" ");
+            String result = "";
+            for (int i = 0; i < split.length; i++) {
+                final String currentWord = split[i];
+                result+=currentWord + " ";
+                while (i < split.length - 1 && currentWord.equals(alphaNumericValues(split[i+1]))) {
+                    String punctuations = getPunctuations(split[i+1]);
+                    if (punctuations.length() > 0) {
+                        result = result.substring(0, result.length() - 1);
+                        result += punctuations + " ";
+                    }
+                    i++;
                 }
-                i++;
             }
+            writeContent(result.trim());
         }
-        writeContent(result.trim());
+
     }
 
     private String alphaNumericValues(String word) {

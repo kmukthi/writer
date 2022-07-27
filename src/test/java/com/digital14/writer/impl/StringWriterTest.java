@@ -121,9 +121,30 @@ public class StringWriterTest {
         Assert.assertEquals("This is really stupid!!!", stringWriter.read());
     }
 
-    @Test(expected = RuntimeException.class)
-    public void shouldThrowExcpetionWhileWrtingNull() {
-        this.stringWriter.write(null);
+    @Test
+    public void shouldNotThrowExceptionWhenContentIsNullWhileTryingToRemoveDuplicate() {
+        this.stringWriter.removeDuplicate();
+        Assert.assertEquals(null, this.stringWriter.read());
+    }
+
+    @Test
+    public void shouldNotThrowExceptionWhenContentIsEmptyWhileTryingToRemoveDuplicate() {
+        this.stringWriter.writeContent("");
+        this.stringWriter.removeDuplicate();
+        Assert.assertEquals("", this.stringWriter.read());
+    }
+
+    @Test
+    public void shouldNotThrowExceptionWhenContentIsNullWhileTryingToRemoveStupid() {
+        this.stringWriter.removeStupid();
+        Assert.assertEquals(null, this.stringWriter.read());
+    }
+
+    @Test
+    public void shouldNotThrowExceptionWhenContentIsEmptyWhileTryingToRemoveStupid() {
+        this.stringWriter.writeContent("");
+        this.stringWriter.removeStupid();
+        Assert.assertEquals("", this.stringWriter.read());
     }
 
 }
