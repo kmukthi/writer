@@ -91,4 +91,11 @@ public class FileWriterTest {
         this.fileWriter.stupidRemover();
         Assert.assertEquals("This is really s*****!!!", fileWriter.read());
     }
+
+    @Test
+    public void shouldWriteContent() {
+        this.fileWriter.writeContent("This is really really stupid!!!");
+        this.fileWriter.close();
+        Assert.assertEquals("This is really really stupid!!!", fileWriter.read());
+    }
 }

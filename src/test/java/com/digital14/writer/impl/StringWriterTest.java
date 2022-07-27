@@ -100,4 +100,11 @@ public class StringWriterTest {
         Assert.assertEquals("This is really s*****!!!", stringWriter.read());
     }
 
+    @Test
+    public void shouldWriteContent() {
+        this.stringWriter.writeContent("This is really really stupid!!!");
+        this.stringWriter.close();
+        Assert.assertEquals("This is really really stupid!!!", stringWriter.read());
+    }
+
 }
