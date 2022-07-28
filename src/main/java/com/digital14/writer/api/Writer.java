@@ -24,11 +24,17 @@ public abstract class Writer {
     }
 
     public final void toLowerCase() {
-        writeContent(read().toLowerCase());
+        String content = this.read();
+        if (content != null && content.length() > 0) {
+            writeContent(read().toLowerCase());
+        }
     }
 
     public final void toUpperCase() {
-        writeContent(read().toUpperCase());
+        String content = this.read();
+        if (content != null && content.length() > 0) {
+            writeContent(read().toUpperCase());
+        }
     }
 
     public final void removeStupid() {

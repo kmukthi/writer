@@ -109,14 +109,14 @@ public class StringWriterTest {
 
     @Test
     public void shouldWriteTwoStupidWithExclamation() {
-        this.stringWriter.writeContent("This is really really stupid stupid!!!");
+        this.stringWriter.write("This is really really stupid stupid!!!");
         this.stringWriter.removeDuplicate();
         Assert.assertEquals("This is really stupid!!!", stringWriter.read());
     }
 
     @Test
     public void shouldWriteThreeStupidWithExclamation() {
-        this.stringWriter.writeContent("This is really really stupid stupid!!! stupid stupid");
+        this.stringWriter.write("This is really really stupid stupid!!! stupid stupid");
         this.stringWriter.removeDuplicate();
         Assert.assertEquals("This is really stupid!!!", stringWriter.read());
     }
@@ -124,12 +124,12 @@ public class StringWriterTest {
     @Test
     public void shouldNotThrowExceptionWhenContentIsNullWhileTryingToRemoveDuplicate() {
         this.stringWriter.removeDuplicate();
-        Assert.assertEquals(null, this.stringWriter.read());
+        Assert.assertNull(this.stringWriter.read());
     }
 
     @Test
     public void shouldNotThrowExceptionWhenContentIsEmptyWhileTryingToRemoveDuplicate() {
-        this.stringWriter.writeContent("");
+        this.stringWriter.write("");
         this.stringWriter.removeDuplicate();
         Assert.assertEquals("", this.stringWriter.read());
     }
@@ -137,12 +137,38 @@ public class StringWriterTest {
     @Test
     public void shouldNotThrowExceptionWhenContentIsNullWhileTryingToRemoveStupid() {
         this.stringWriter.removeStupid();
-        Assert.assertEquals(null, this.stringWriter.read());
+        Assert.assertNull(this.stringWriter.read());
+    }
+
+    @Test
+    public void shouldNotThrowExceptionWhenContentIsNullWhileTryingToCovertToLowercase() {
+        this.stringWriter.toLowerCase();
+        Assert.assertNull(this.stringWriter.read());
+    }
+
+    @Test
+    public void shouldNotThrowExceptionWhenContentIsEmptyWhileTryingToCovertToLowercase() {
+        this.stringWriter.write("");
+        this.stringWriter.toLowerCase();
+        Assert.assertEquals("", this.stringWriter.read());
+    }
+
+    @Test
+    public void shouldNotThrowExceptionWhenContentIsNullWhileTryingToCovertToUppercase() {
+        this.stringWriter.toUpperCase();
+        Assert.assertNull(this.stringWriter.read());
+    }
+
+    @Test
+    public void shouldNotThrowExceptionWhenContentIsEmptyWhileTryingToCovertToUppercase() {
+        this.stringWriter.write("");
+        this.stringWriter.toUpperCase();
+        Assert.assertEquals("", this.stringWriter.read());
     }
 
     @Test
     public void shouldNotThrowExceptionWhenContentIsEmptyWhileTryingToRemoveStupid() {
-        this.stringWriter.writeContent("");
+        this.stringWriter.write("");
         this.stringWriter.removeStupid();
         Assert.assertEquals("", this.stringWriter.read());
     }
